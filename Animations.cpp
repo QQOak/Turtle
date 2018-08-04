@@ -2,6 +2,7 @@
 #include "Animations.h"
 
 #include <Adafruit_NeoPixel.h>
+#include "ColourProvider.h"
 
 Animations::Animations(Adafruit_NeoPixel strip)
 {
@@ -17,20 +18,20 @@ void Animations::Clear()
 }
 
 
-void Animations::SinglePixelSpin(uint32_t colour)
+void Animations::SinglePixelSpin(ColourProvider *colourProvider)
 {
+
+  // Don't forget, with pointers, we're using object->method syntax rather than object.method
 
   for(uint32_t i=0; i<_strip.numPixels(); i++) {
     Clear();
-    _strip.setPixelColor(i, colour);
+    Serial.println("Asking for Colour");
+    _strip.setPixelColor(i, colourProvider->NextColour());
     _strip.show();
     delay(200);
   }
   
 }
 
-void Animations::SinglePixelSpin(uint32_t colours[])
-{
-  
-}
+
 

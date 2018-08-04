@@ -7,7 +7,7 @@ class ColourProvider
 {
 
   public:
-    virtual uint32_t NextColour();
+    inline virtual uint32_t NextColour() = 0;
     
   private:
 

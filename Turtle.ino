@@ -1,5 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include "Animations.h"
+#include "SingleColourProvider.h"
 #define PIN 6
 #define NUMPIXELS 12
 
@@ -28,12 +29,16 @@ int count = 0;
 
 void loop() {
 
-  animation.SinglePixelSpin(strip.Color(64, 64, 64));
+  SingleColourSpinner();
   
 }
 
 
-
+void SingleColourSpinner()
+{
+  SingleColourProvider colourProvider = SingleColourProvider(strip.Color(255, 0, 0));
+  animation.SinglePixelSpin(&colourProvider);
+}
 
 
 

@@ -8,10 +8,18 @@ class SingleColourProvider : public ColourProvider
 {
 
   public:
-    uint32_t NextColour();
+    inline SingleColourProvider(uint32_t colour)
+    {
+      _colour = colour;
+    }
+    inline uint32_t NextColour()
+    {
+      return _colour;;
+    }
     
   private:
-
+    uint32_t _colour;
+    
 };
 
 #endif

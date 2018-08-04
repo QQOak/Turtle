@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include <Adafruit_NeoPixel.h>
+#include "ColourProvider.h"
 
 class Animations
 {
@@ -10,8 +11,7 @@ class Animations
   public:
     Animations(Adafruit_NeoPixel strip);
     void Clear();
-    void SinglePixelSpin(uint32_t colour);
-    void SinglePixelSpin(uint32_t colours[]);
+    void SinglePixelSpin(ColourProvider *colourProvider);
     
   private:
     Adafruit_NeoPixel _strip;
