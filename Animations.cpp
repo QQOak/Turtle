@@ -17,12 +17,12 @@ void Animations::Clear()
 }
 
 
-void Animations::SinglePixelSpin()
+void Animations::SinglePixelSpin(uint32_t colour)
 {
 
   for(uint32_t i=0; i<_strip.numPixels(); i++) {
     Clear();
-    _strip.setPixelColor(i, 0, 0, 0);
+    _strip.setPixelColor(i, colour);
     _strip.show();
     delay(200);
   }

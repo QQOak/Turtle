@@ -27,33 +27,15 @@ void setup() {
 int count = 0;
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
-
-
-  circulate();
+  animation.SinglePixelSpin(strip.Color(64, 64, 64));
   
 }
 
 
 
-void loopColour()
-{
-  for(int i=0; i<4; i++)
-  {
-    loopColour2(ColourCycle[i]);  
-  }
-}
 
-void loopColour2(uint32_t colour)
-{
-  for(uint32_t i=0; i<strip.numPixels(); i++) {
-    animation.Clear();
-    strip.setPixelColor(i, colour);
-    strip.show();
-    delay(200);
-  }
-}
+
 
 
 
