@@ -16,6 +16,7 @@ class SequentialColourProvider : public ColourProvider
      // Set the current index to the maximum bound of the array so that we start with the fist colour.
      // Nextcolour increments and modals the number as part of it's call and it makes sense to prepare the variable here once rather than complicate the logic in the loop later.
      _currentIndex = coloursCount-1;
+     
     }
 
     inline uint32_t NextColour()

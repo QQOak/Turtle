@@ -2,6 +2,7 @@
 #include "Animations.h"
 #include "SingleColourProvider.h"
 #include "SequentialColourProvider.h"
+#include "RandomColourProvider.h"
 #define PIN 6
 #define NUMPIXELS 12
 
@@ -31,8 +32,8 @@ int count = 0;
 void loop() {
 
   //SingleColourSpinner();
-  SequentialColourSpinner();
-  
+  //SequentialColourSpinner();
+  RandomColourSpinner();
 }
 
 
@@ -51,6 +52,18 @@ void SequentialColourSpinner()
     strip.Color(0, 0, 32)
   };
   SequentialColourProvider colourProvider = SequentialColourProvider(colours, 4);
+  animation.SinglePixelSpin(&colourProvider);  
+}
+
+void RandomColourSpinner()
+{
+uint32_t colours[] = {
+    strip.Color(32, 32, 32),
+    strip.Color(32, 0, 0),
+    strip.Color(0, 32, 0),
+    strip.Color(0, 0, 32)
+  };
+  RandomColourProvider colourProvider = RandomColourProvider(colours, 4);
   animation.SinglePixelSpin(&colourProvider);  
 }
 
