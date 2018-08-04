@@ -1,8 +1,10 @@
 #include <Adafruit_NeoPixel.h>
+#include "Animations.h"
 #define PIN 6
 #define NUMPIXELS 12
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Animations animation = Animations(strip);
 
 const uint32_t ColourCycle[] = {
   strip.Color(64, 64, 64), // white
@@ -33,13 +35,7 @@ void loop() {
   
 }
 
-void clear ()
-{
-  for(uint16_t i=0; i<strip.numPixels (); i++) {
-      strip.setPixelColor (i, 0, 0, 0);
-  }
-  strip.show();
-}
+
 
 void loopColour()
 {
@@ -52,7 +48,7 @@ void loopColour()
 void loopColour2(uint32_t colour)
 {
   for(uint32_t i=0; i<strip.numPixels(); i++) {
-    clear();
+    animation.Clear();
     strip.setPixelColor(i, colour);
     strip.show();
     delay(200);
@@ -68,7 +64,7 @@ void circulate()
 
   
   for(uint32_t i=0; i<strip.numPixels(); i++) {
-    clear();
+    animation.Clear();
     strip.setPixelColor(i, ColourCycle[colourIndex]);
     colourIndex = nextColourIndex(colourIndex);
     strip.show();

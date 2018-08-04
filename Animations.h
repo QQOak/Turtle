@@ -9,7 +9,9 @@ class Animations
 
   public:
     Animations(Adafruit_NeoPixel strip);
-    void Spin();
+    void Clear();
+    void SinglePixelSpin();
+    void SinglePixelSpin(uint32_t colours[]);
     
   private:
     Adafruit_NeoPixel _strip;
