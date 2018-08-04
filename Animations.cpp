@@ -28,7 +28,7 @@ void Animations::SinglePixelSpin(ColourProvider *colourProvider)
     Serial.println("Asking for Colour");
     _strip.setPixelColor(i, colourProvider->NextColour());
     _strip.show();
-    delay(200);
+    delay(2000);
   }
   
 }

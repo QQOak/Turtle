@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include "Animations.h"
 #include "SingleColourProvider.h"
+#include "SequentialColourProvider.h"
 #define PIN 6
 #define NUMPIXELS 12
 
@@ -29,53 +30,27 @@ int count = 0;
 
 void loop() {
 
-  SingleColourSpinner();
+  //SingleColourSpinner();
+  SequentialColourSpinner();
   
 }
 
 
 void SingleColourSpinner()
 {
-  SingleColourProvider colourProvider = SingleColourProvider(strip.Color(255, 0, 0));
+  SingleColourProvider colourProvider = SingleColourProvider(strip.Color(32, 32, 32));
   animation.SinglePixelSpin(&colourProvider);
 }
 
-
-
-
-
-
-void circulate()
+void SequentialColourSpinner()
 {
-  int colourIndex = 0;
-
-  
-  for(uint32_t i=0; i<strip.numPixels(); i++) {
-    animation.Clear();
-    strip.setPixelColor(i, ColourCycle[colourIndex]);
-    colourIndex = nextColourIndex(colourIndex);
-    strip.show();
-    delay(500);
-  }
-  
-}
-
-uint32_t nextColourIndex(uint32_t current)
-{
-  uint32_t index = current;
-  Serial.print("Input: ");
-  Serial.print(current);
-  
-  
-  index = (++current % 4);
-
-  Serial.println();
-  return (index);
-}
-
-
-void sparkle()
-{
-  
+  uint32_t colours[] = {
+    strip.Color(32, 32, 32),
+    strip.Color(32, 0, 0),
+    strip.Color(0, 32, 0),
+    strip.Color(0, 0, 32)
+  };
+  SequentialColourProvider colourProvider = SequentialColourProvider(colours, 4);
+  animation.SinglePixelSpin(&colourProvider);  
 }
 
