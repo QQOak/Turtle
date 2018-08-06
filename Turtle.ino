@@ -1,69 +1,62 @@
 #include <Adafruit_NeoPixel.h>
-#include "Animations.h"
+
+
+#include "ColourProvider.h"
 #include "SingleColourProvider.h"
-#include "SequentialColourProvider.h"
-#include "RandomColourProvider.h"
-#define PIN 6
+#include "Animation.h"
+#include "SpinnerAnimation.h"
+
+
+
+#define PIN 10
 #define NUMPIXELS 12
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-Animations animation = Animations(strip);
+ColourProvider* colourProvider;
+Animation* animation;
 
-const uint32_t ColourCycle[] = {
-  strip.Color(64, 64, 64), // white
-  strip.Color(128, 0, 0), // red
-  strip.Color(0, 128, 0), // green
-  strip.Color(0, 0, 128) // blue
-};
 
 void setup() {
-  // put your setup code here, to run once:
 
+  Serial.begin(9600);
+  Serial.println();
+  Serial.println(" ********** ARDUINO STARTUP **********");
+  Serial.println();
+    
   
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
-
-  Serial.begin(9600);
-
+  SingleColourSpinner();
+  
 }
-
-int count = 0;
 
 void loop() {
 
-  //SingleColourSpinner();
-  //SequentialColourSpinner();
-  RandomColourSpinner();
+  // Get an array containing all of the values for the pixels
+  uint32_t pixels[NUMPIXELS];  
+  animation->NextFrame(pixels);
+
+  // put those values into the neopixels and show them.
+  for(uint32_t i=0; i<NUMPIXELS; i++)
+  {
+    strip.setPixelColor(i, pixels[i]);
+  }
+  strip.show();
+  
+  //delay(0);
 }
 
 
 void SingleColourSpinner()
 {
-  SingleColourProvider colourProvider = SingleColourProvider(strip.Color(32, 32, 32));
-  animation.SinglePixelSpin(&colourProvider);
-}
+  colourProvider = new SingleColourProvider(strip.Color(32, 0, 0));
+  animation = new SpinnerAnimation(colourProvider, NUMPIXELS);
+  animation->SetDelay(100);
 
-void SequentialColourSpinner()
-{
-  uint32_t colours[] = {
-    strip.Color(32, 32, 32),
-    strip.Color(32, 0, 0),
-    strip.Color(0, 32, 0),
-    strip.Color(0, 0, 32)
-  };
-  SequentialColourProvider colourProvider = SequentialColourProvider(colours, 4);
-  animation.SinglePixelSpin(&colourProvider);  
-}
 
-void RandomColourSpinner()
-{
-uint32_t colours[] = {
-    strip.Color(32, 32, 32),
-    strip.Color(32, 0, 0),
-    strip.Color(0, 32, 0),
-    strip.Color(0, 0, 32)
-  };
-  RandomColourProvider colourProvider = RandomColourProvider(colours, 4);
-  animation.SinglePixelSpin(&colourProvider);  
+  
+
+  
+  //animation.SinglePixelSpin(colourProvider);
 }
 

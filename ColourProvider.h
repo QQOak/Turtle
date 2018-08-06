@@ -6,11 +6,13 @@
 class ColourProvider
 {
 
+  protected:
+
+  private:
+
   public:
     inline virtual uint32_t NextColour() = 0;
     
-  private:
-
 };
 
 #endif
