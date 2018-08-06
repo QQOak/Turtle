@@ -25,7 +25,11 @@ void setup() {
     
   
   strip.begin();
-  strip.show(); // Initialize all pixels to 'off'
+  for(uint32_t i=0; i<NUMPIXELS; i++)
+  {
+    strip.setPixelColor(i, 0);
+  }
+  strip.show();
   SingleColourSpinner();
   
 }
@@ -43,13 +47,14 @@ void loop() {
   }
   strip.show();
   
-  //delay(0);
+  
+  
 }
 
 
 void SingleColourSpinner()
 {
-  colourProvider = new SingleColourProvider(strip.Color(32, 0, 0));
+  colourProvider = new SingleColourProvider(strip.Color(0, 0, 32));
   animation = new SpinnerAnimation(colourProvider, NUMPIXELS);
   animation->SetDelay(100);
 
