@@ -3,12 +3,13 @@
 
 #include "ColourProvider.h"
 #include "SingleColourProvider.h"
+#include "RandomColourProvider.h"
 #include "Animation.h"
 #include "SpinnerAnimation.h"
 
 
 
-#define PIN 10
+#define PIN 12
 #define NUMPIXELS 12
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
@@ -28,10 +29,11 @@ void setup() {
   for(uint32_t i=0; i<NUMPIXELS; i++)
   {
     strip.setPixelColor(i, 0);
+    Serial.println("");
   }
   strip.show();
-  SingleColourSpinner();
-  
+  //SingleColourSpinner();
+  RandomColourSpinner();
 }
 
 void loop() {
@@ -54,14 +56,22 @@ void loop() {
 
 void SingleColourSpinner()
 {
-  colourProvider = new SingleColourProvider(strip.Color(0, 0, 32));
+  colourProvider = new SingleColourProvider(strip.Color(32, 0, 0));
   animation = new SpinnerAnimation(colourProvider, NUMPIXELS);
   animation->SetDelay(100);
+}
 
-
-  
-
-  
-  //animation.SinglePixelSpin(colourProvider);
+void RandomColourSpinner()
+{
+    uint32_t colours[4] {
+      strip.Color(32, 0, 0),
+      strip.Color(0, 32, 0),
+      strip.Color(0, 0, 32),
+      strip.Color(32, 32, 32)
+    };
+    colourProvider = new RandomColourProvider(colours, 4, NUMPIXELS/2);
+    animation = new SpinnerAnimation(colourProvider, NUMPIXELS);
+    animation->SetDelay(100);
+    
 }
 

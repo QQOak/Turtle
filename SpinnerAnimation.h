@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "Animation.h"
 
+// Spinner Animation that 
 class SpinnerAnimation : public Animation
 {
 
@@ -21,8 +22,7 @@ class SpinnerAnimation : public Animation
 
     inline void NextFrame(uint32_t pixels[])
     {
-      //Serial.println("SpinnerAnimation NextFrame()");
-      
+     
       // Only make a change to the pixels if enough milliseconds have elapsed.
       uint32_t currentMillis = millis();
       if( currentMillis >= lastMillis+delayMillis )
@@ -43,10 +43,6 @@ class SpinnerAnimation : public Animation
         pixelIndex = (++pixelIndex % pixelCount);
         Serial.println("Animation");
       } 
-      else
-      {
-        //Serial.println("No action taken");
-      }
       
       
     }
@@ -68,57 +64,7 @@ class SpinnerAnimation : public Animation
     
 };
 
+
 #endif
 
 
-
-
-/*
-
-Animation::SpinnerAnimation(Adafruit_NeoPixel strip) : _strip(strip)
-{
-}
-
-void Animations::Clear()
-{
-  // Doesn't call show.
-  for(uint16_t i=0; i<_strip.numPixels(); i++) {
-      _strip.setPixelColor (i, 0, 0, 0);
-  }
-}
-
-
-void Animations::SinglePixelSpin(ColourProvider* colourProvider)
-{
-
-  // Don't forget, with pointers, we're using object->method syntax rather than object.method
-  _currentPixelIndex = 0;
-  _colourProvider = colourProvider; 
-}
-
-void Animations::NextFrame()
-{
-  Serial.println("Cleared");
-
-  uint32_t currentMillis = millis();
-  if(currentMillis >= _lastAnimationMillis + _delayMillis)
-  {
-    // Reset the clock
-    _lastAnimationMillis = currentMillis;  
-
-    // Set the pixels
-    //Clear();
-
-
-    Serial.print("NEXTCOLOUR ");
-    Serial.println(_colourProvider->NextColour());
-    _strip.setPixelColor(_currentPixelIndex, _colourProvider->NextColour());
-    //_strip.show();
-
-    // increment the index.
-    _currentPixelIndex = (++_currentPixelIndex % _strip.numPixels());
-  }
-    
-}
-
-*/

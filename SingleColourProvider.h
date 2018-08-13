@@ -7,6 +7,9 @@
 class SingleColourProvider : public ColourProvider
 {
 
+  private:
+    uint32_t _colour;
+    
   public:
     inline SingleColourProvider(uint32_t colour) : _colour(colour)
     {
@@ -16,9 +19,6 @@ class SingleColourProvider : public ColourProvider
     {
       return _colour;
     }
-    
-  private:
-    uint32_t _colour;
     
 };
 
