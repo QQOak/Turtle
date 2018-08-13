@@ -17,19 +17,12 @@ ColourProvider* colourProvider;
 Animation* animation;
 
 
-void setup() {
+void setup() {  
 
-  Serial.begin(9600);
-  Serial.println();
-  Serial.println(" ********** ARDUINO STARTUP **********");
-  Serial.println();
-    
-  
   strip.begin();
   for(uint32_t i=0; i<NUMPIXELS; i++)
   {
     strip.setPixelColor(i, 0);
-    Serial.println("");
   }
   strip.show();
   //SingleColourSpinner();
@@ -63,11 +56,11 @@ void SingleColourSpinner()
 
 void RandomColourSpinner()
 {
-    uint32_t colours[4] {
-      strip.Color(32, 0, 0),
-      strip.Color(0, 32, 0),
-      strip.Color(0, 0, 32),
-      strip.Color(32, 32, 32)
+    const uint32_t *colours = new uint32_t[4] {
+      strip.Color(5, 0, 0),
+      strip.Color(0, 5, 0),
+      strip.Color(0, 0, 5),
+      strip.Color(2, 2, 2)
     };
     colourProvider = new RandomColourProvider(colours, 4, NUMPIXELS/2);
     animation = new SpinnerAnimation(colourProvider, NUMPIXELS);

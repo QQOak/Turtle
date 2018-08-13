@@ -12,12 +12,10 @@ class SpinnerAnimation : public Animation
   
     inline SpinnerAnimation(ColourProvider* colourProvider, uint32_t pixelCount) : _colourProvider(colourProvider), pixelCount(pixelCount)
     {
-      Serial.println("SpinnerAnimation Constructor");
     }
     
     inline ~SpinnerAnimation()
     {
-      Serial.println("SpinnerAnimation Destructor");
     }
 
     inline void NextFrame(uint32_t pixels[])
@@ -41,7 +39,6 @@ class SpinnerAnimation : public Animation
           
         }
         pixelIndex = (++pixelIndex % pixelCount);
-        Serial.println("Animation");
       } 
       
       
