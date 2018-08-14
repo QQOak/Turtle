@@ -12,6 +12,8 @@ class ColourProvider
 
   public:
     inline virtual uint32_t NextColour() = 0;
+
+    virtual ~ColourProvider() {}
     
 };
 
