@@ -19,6 +19,8 @@ Animation* animation;
 
 void setup() {  
 
+  Serial.begin(9600);
+
   strip.begin();
   for(uint32_t i=0; i<NUMPIXELS; i++)
   {
@@ -62,9 +64,13 @@ void RandomColourSpinner()
       strip.Color(0, 0, 5),
       strip.Color(2, 2, 2)
     };
-    colourProvider = new RandomColourProvider(colours, 4, NUMPIXELS/2);
+    colourProvider = new RandomColourProvider(colours, 4, 1);
+    static_cast<RandomColourProvider*>(colourProvider)->setTimesToRepeatColour(48); 
+    //static_cast<RandomColourProvider*>(colourProvider)->AllowRepeats = false;
+    
     animation = new SpinnerAnimation(colourProvider, NUMPIXELS);
-    animation->SetDelay(100);
+    animation->SetDelay(1000);
+    
     
 }
 
