@@ -48,6 +48,11 @@ class SpinnerAnimation : public Animation
     {
       delayMillis = millisecondsDelay;
     }
+
+    inline void SetColourProvider(ColourProvider* colorProvider)
+    {
+      _colourProvider = colorProvider;
+    }
   
   private:
     uint32_t lastMillis = 0;
@@ -63,5 +68,3 @@ class SpinnerAnimation : public Animation
 
 
 #endif
-
-
